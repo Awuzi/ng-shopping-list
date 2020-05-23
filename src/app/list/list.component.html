@@ -1,0 +1,39 @@
+<div class="container mt-5 bg-light rounded">
+  <h1 class="mb-4 pt-4">Chefing - Shopping List App (Angular)</h1>
+  <hr>
+
+  <app-form></app-form>
+
+  <table class="col-md-6" *ngIf="items.length !== 0; else elseBlock">
+    <tr>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th colspan="2">Actions</th>
+    </tr>
+    <tr *ngFor="let item of items">
+      <ng-template hidden *ngIf="item.isDone; then doneBlock; else notDoneBlock"></ng-template>
+      <ng-template #notDoneBlock>
+        <td>{{ item.name }}</td>
+        <td>{{ item.quantity }}</td>
+      </ng-template>
+
+      <ng-template #doneBlock>
+        <td><s><em>{{ item.name }}</em></s></td>
+        <td><s><em>{{ item.quantity }}</em></s></td>
+      </ng-template>
+      <td>
+        <button (click)="checkItem(item)" class="btn btn-outline-success"><i class="fas fa-check"></i></button>
+      </td>
+      <td>
+        <button (click)="deleteItem(item)" class="delete btn btn-outline-danger"><i class="fa fa-trash"></i></button>
+      </td>
+    </tr>
+  </table>
+
+  <ng-template #elseBlock>
+    <p class="no-item">
+      No item in your shopping list
+    </p>
+  </ng-template>
+
+</div>
