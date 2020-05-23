@@ -1,7 +1,7 @@
 import {Component, ElementRef, Input, OnInit} from '@angular/core';
 
-import {ApiService} from "../../services/ApiService/api.service";
-import {HttpClient} from "@angular/common/http";
+import {ApiService} from '../../services/ApiService/api.service';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-list',
@@ -24,15 +24,15 @@ export class ListComponent implements OnInit {
   }
 
   checkItem(item) {
-    this.api.updateItem(item)
+    this.api.updateItem(item);
     item.isDone = !item.isDone;
   }
 
   deleteItem(item) {
     /*delete from db*/
-    this.api.deleteItem(item)
+    this.api.deleteItem(item);
     /*delete table row*/
     this.items.splice(this.items.indexOf(item), 1);
-  };
+  }
 
 }

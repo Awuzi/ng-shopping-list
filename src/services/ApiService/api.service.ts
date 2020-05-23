@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class ApiService {
 
-  public API_URL: string = 'http://localhost:3000/api/';
+  public API_URL = 'http://localhost:3000/api/';
 
   constructor(private http: HttpClient) {}
 
@@ -14,23 +14,23 @@ export class ApiService {
     return this.http.get(this.API_URL);
   }
 
-  postItem(item: Object) {
+  postItem(item: object) {
     return this.http.post(this.API_URL, item).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );
   }
 
-  deleteItem(item : Object) {
-    return this.http.post(this.API_URL+"delete", item).subscribe(
+  deleteItem(item: object) {
+    return this.http.post(this.API_URL + 'delete', item).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );
   }
 
 
-  updateItem(item : Object) {
-    return this.http.post(this.API_URL+"update", item).subscribe(
+  updateItem(item: object) {
+    return this.http.post(this.API_URL + 'update', item).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );

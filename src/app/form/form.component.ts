@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ListComponent} from "../list/list.component";
-import {ApiService} from "../../services/ApiService/api.service";
-import {FormControl, FormGroup} from "@angular/forms";
+import {ListComponent} from '../list/list.component';
+import {ApiService} from '../../services/ApiService/api.service';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -32,8 +32,9 @@ export class FormComponent implements OnInit {
         name: this.addForm.value.title,
         quantity: this.addForm.value.quantity,
       });
+      this.addForm.reset();
     } else {
-      alert('Veuillez remplir tous les champs.')
+      alert('Veuillez remplir tous les champs.');
     }
   }
 
