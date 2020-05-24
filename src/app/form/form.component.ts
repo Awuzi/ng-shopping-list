@@ -23,7 +23,7 @@ export class FormComponent implements OnInit {
   }
 
   addItem() {
-    if (this.addForm.value.title !== null && this.addForm.value.quantity !== null) {
+    if (this.addForm.value.title !== null && !isNaN(Number(this.addForm.value.quantity)) && this.addForm.value.quantity !== null) {
       this.list.items.push({
         name: this.addForm.value.title,
         quantity: this.addForm.value.quantity,

@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from "@angular/forms";
+import {NavigationExtras, Router} from '@angular/router';
+
+import {ApiService} from "../../services/ApiService/api.service";
+
 
 @Component({
   selector: 'app-register',
@@ -7,9 +12,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  public succesRegistrationMessage: NavigationExtras = {state: {messageFalsh: 'Correctly registered ;)'}}
 
-  ngOnInit(): void {
+  public registerForm = new FormGroup({
+    username: new FormControl(),
+    password: new FormControl(),
+  });
+
+  constructor(private api: ApiService, private route: Router) {
   }
 
+  ngOnInit(): void {
+    this.registerForm.reset();
+  }
+
+  register() {
+    this.api.register({
+      username: this.registerForm.value.username,
+      password: this.registerForm.value.password,
+    });
+    this.route.navigate(['/'], this.succesRegistrationMessage).then(r => console.log(r));
+  }
 }

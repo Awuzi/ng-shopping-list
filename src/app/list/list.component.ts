@@ -2,6 +2,7 @@ import {Component, ElementRef, Input, OnInit} from '@angular/core';
 
 import {ApiService} from '../../services/ApiService/api.service';
 import {HttpClient} from '@angular/common/http';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-list',
@@ -13,14 +14,17 @@ import {HttpClient} from '@angular/common/http';
 export class ListComponent implements OnInit {
 
   public items = [];
+  public messageFlash: string; //for messageFlash
 
-  constructor(private http: HttpClient, private api: ApiService, private elements: ElementRef) {
+  constructor(private http: HttpClient, private api: ApiService, private router: Router) {
+    //messageFlash
+    /*    const navigation = this.router.getCurrentNavigation();
+        const state = navigation.extras.state as { messageFlash: string };
+        this.messageFlash = state.messageFlash;*/
   }
 
   ngOnInit(): void {
-    this.api.getItems().subscribe((items: any[]) => {
-      this.items = items;
-    });
+    this.api.getItems().subscribe((items: any[]) => this.items = items);
   }
 
   checkItem(item) {

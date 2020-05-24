@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const crypto = require('crypto');
 
 const Shopping = require('../models/ShoppingList');
+const User = require('../models/User');
 
 /* GET home page. */
 router.get('/', async (req, res) => {
@@ -23,6 +25,20 @@ router.post('/update', async (req, res) => {
 router.post('/delete', async (req, res) => {
   await Shopping.findOneAndDelete(req.body);
   res.status(200);
+});
+
+router.post("/register", async (req, res) => {
+  if (!await User.findOne({username: req.body.username})) {
+    await new User({
+        username: req.body.username,
+        password: crypto
+          .createHash("sha256")
+          .update(req.body.password)
+          .digest("base64"),
+        role: "member",
+      }).save();
+    res.status(200);
+  }
 });
 
 module.exports = router;

@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class ApiService {
 
-  public API_URL = 'http://localhost:3000/api/';
+  public API_URL = 'http://localhost:3000/api';
 
   constructor(private http: HttpClient) {}
 
@@ -22,7 +22,7 @@ export class ApiService {
   }
 
   deleteItem(item: object) {
-    return this.http.post(this.API_URL + 'delete', item).subscribe(
+    return this.http.post(`${this.API_URL}/delete`, item).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );
@@ -30,7 +30,15 @@ export class ApiService {
 
 
   updateItem(item: object) {
-    return this.http.post(this.API_URL + 'update', item).subscribe(
+    return this.http.post(`${this.API_URL}/update`, item).subscribe(
+      (res) => console.log(res),
+      (err) => console.log(err)
+    );
+  }
+
+  register(credentials: object) {
+    console.log("credential: " + credentials);
+    return this.http.post(`${this.API_URL}/register`, credentials).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );
