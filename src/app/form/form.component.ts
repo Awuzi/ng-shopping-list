@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ListComponent} from '../list/list.component';
 import {ApiService} from '../../services/ApiService/api.service';
 import {FormControl, FormGroup} from '@angular/forms';
+import {LoginComponent} from '../login/login.component';
 
 @Component({
   selector: 'app-form',
@@ -15,7 +16,7 @@ export class FormComponent implements OnInit {
     quantity: new FormControl(),
   });
 
-  constructor(public api: ApiService, public list: ListComponent) {
+  constructor(public apiS: ApiService, public list: ListComponent, public login: LoginComponent) {
   }
 
   ngOnInit(): void {
@@ -28,10 +29,13 @@ export class FormComponent implements OnInit {
         name: this.addForm.value.title,
         quantity: this.addForm.value.quantity,
       });
-      this.api.postItem({
+      this.apiS.postItem({
         name: this.addForm.value.title,
         quantity: this.addForm.value.quantity,
-      });
+      }).subscribe(
+        (res) => console.log(res),
+        (err) => console.log(err)
+      );
       this.addForm.reset();
     } else {
       alert('Veuillez remplir tous les champs.');

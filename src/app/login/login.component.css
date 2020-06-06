@@ -1,0 +1,9 @@
+::ng-deep .warning{
+  background: #ef4444;
+  color: #ffffff;
+}
+
+::ng-deep .success{
+  background: #28A745;
+  color: #FFFFFF;
+}

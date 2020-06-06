@@ -1,9 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-link" routerLink="/">Home</a>
-      <a class="nav-link" routerLink="/login">Login</a>
-      <a class="nav-link" routerLink="/register">Register</a>
-    </div>
+  <div class="navbar-nav mr-auto">
+    <a class="nav-link" routerLink="/">Home</a>
+  </div>
+  <div class="navbar-nav">
+    <a class="nav-link" *ngIf="!this.login.isLoggedIn" routerLink="/login"> <i class="fas fa-sign-in-alt"></i> Login</a>
+    <a class="nav-link" *ngIf="!this.login.isLoggedIn" routerLink="/register"> <i class="fas fa-user-plus"></i> Register</a>
+
+    <a class="nav-link" *ngIf="this.login.isLoggedIn"> <i class="fas fa-user"></i> Welcome {{username | titlecase}}</a>
+    <a class="nav-link" *ngIf="this.login.isLoggedIn" (click)="logout()"> <i class="fas fa-sign-out-alt"></i> Logout</a>
   </div>
 </nav>

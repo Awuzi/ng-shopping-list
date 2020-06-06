@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {LoginComponent} from '../login/login.component';
+import {ApiService} from '../../services/ApiService/api.service';
 
 @Component({
   selector: 'app-navbar-header',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarHeaderComponent implements OnInit {
 
-  constructor() { }
+  public username: string;
+
+  constructor(public login: LoginComponent, public apiS: ApiService) {
+  }
 
   ngOnInit(): void {
+    this.username = this.apiS.getUsername().username;
+    console.log(this.username);
+  }
+
+  logout() {
+    this.login.logout();
   }
 
 }

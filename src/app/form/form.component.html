@@ -1,4 +1,4 @@
-<form [formGroup]="addForm" (ngSubmit)="addItem()">
+<form [formGroup]="addForm" (ngSubmit)="addItem()" *ngIf="this.login.isLoggedIn; else elseBlock">
   <div class="form-row">
     <div class="col-4">
       <label for="title" hidden></label>
@@ -13,3 +13,9 @@
     </div>
   </div>
 </form>
+
+<ng-template #elseBlock>
+  <p class="no-item">
+    Please <a routerLink="/login">login</a> to see your items
+  </p>
+</ng-template>
